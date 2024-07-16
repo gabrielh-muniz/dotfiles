@@ -13,13 +13,7 @@
 - Fetch: neofetch
 - Colorscheme: gruvbox
 
-## Requirement
-- Stow:
-```bash
-sudo apt install stow
-```
-
 ## Installation
 Run `./setup.sh`
 
-*Note*: Current, this script is made for brand new debian-based distros.
+**Note**: Current, this script is made for brand new debian-based distros.

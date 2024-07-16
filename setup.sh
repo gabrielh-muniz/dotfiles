@@ -7,6 +7,7 @@ set -o pipefail		# don't hide errors within pipes
 IFS='\n\t'
 
 DOTFILES="$HOME/dotfiles"
+dependencies=(stow git i3)
 
 # prints an info msg to the screen 
 info() 
