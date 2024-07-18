@@ -10,7 +10,9 @@ return {
 
     gruvbox.setup({
       bold = true,
-      italic = {},
+      italic = {
+        strings = false,
+      },
     })
 
     vim.cmd("colorscheme gruvbox")
