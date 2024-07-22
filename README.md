@@ -9,11 +9,11 @@
 - Terminal: st
 - Shell: Bash
 - Editor: Neovim
-- Font: Victor Mono
+- Font: Meslo 
 - Fetch: neofetch
 - Colorscheme: gruvbox
 
 ## Installation
 Run `./setup.sh`
 
-**Note**: Current, this script is made for brand new debian-based distros.
+**Note**: Currently, this script is made for brand new debian-based distros.
