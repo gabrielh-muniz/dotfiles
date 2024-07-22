@@ -12,6 +12,7 @@ return {
       bold = true,
       italic = {
         strings = false,
+        comments = false,
       },
     })
 

@@ -1,5 +1,4 @@
 local function map(mode, lhs, rhs, opts)
-  -- set default value if not specify
   if opts.noremap == nil then
     opts.noremap = true
   end
@@ -15,9 +14,7 @@ vim.g.maplocalleader = " "
 
 map("i", "jk", "<ESC>", {})
 
--- better up/down
 local keymap = vim.keymap
-
 keymap.set({ "n", "v" }, "j", function()
   return vim.v.count > 0 and "j" or "gj"
 end, { expr = true })
@@ -26,16 +23,11 @@ keymap.set({ "n", "v" }, "k", function()
   return vim.v.count > 0 and "k" or "gk"
 end, { expr = true})
 
--- better scrolling
 map("n", "<C-u>", "<C-u>zz", {})
 map("n", "<C-d>", "<C-d>zz", {})
-map("n", "<C-b>", "<C-b>zz", {})
-map("n", "<C-f>", "<C-f>zz", {})
 
--- leader mappings
 map("n", "<leader>pv", vim.cmd.Ex, {})
 map("n", "<leader>nh", ":nohl<CR>", {})
-map("n", "<leader>s", ":so<CR>", {})
 map("n", "<leader>+", "<C-a>", {})
 
 map("n", "<leader>sv", "<C-w>v", {})
@@ -47,3 +39,16 @@ map("n", "<leader>tx", ":tabclose<CR>", {})
 map("n", "<leader>tn", ":tabn<CR>", {})
 map("n", "<leader>tp", ":tabp<CR>", {})
 map("n", "<leader>tf", ":tabnew %<CR>", {})
+
+map("v", "J", ":m '>+1<CR>gv=gv", {})
+map("v", "K", ":m '<-2<CR>gv=gv", {})
+
+map("n", "n", "nzzzv", {})
+map("n", "N", "Nzzzv", {})
+
+map("x", "<leader>p", "\"_dP", {})
+
+map({"n", "v"}, "<leader>y", [["+y]], {})
+map("n", "<leader>Y", [["+Y]], {})
+
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {})

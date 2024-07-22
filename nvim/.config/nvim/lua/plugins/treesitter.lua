@@ -2,9 +2,6 @@ return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate", -- execute whenever the plugin is updated or installed
-  dependencies = {
-    "windwp/nvim-ts-autotag",
-  },
   config = function()
     local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
     if not status_ok then
@@ -17,9 +14,6 @@ return {
         enable = true,
       },
       indent = { enable = true }, -- enable better indentation
-      autotag = {
-        enable = true,
-      },
       -- language parsers to be installed
       ensure_installed = {
         "json",

@@ -30,7 +30,7 @@ opt.timeoutlen = 300
 
 opt.termguicolors = true
 
-opt.clipboard:append("unnamedplus")
+-- opt.clipboard:append("unnamedplus")
 
 opt.swapfile = false
 opt.backup   = false
