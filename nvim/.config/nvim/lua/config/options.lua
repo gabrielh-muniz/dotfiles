@@ -34,3 +34,8 @@ opt.termguicolors = true
 
 opt.swapfile = false
 opt.backup   = false
+
+opt.list = true
+opt.listchars = {space = "⋅", eol = "↲"}
+
+opt.signcolumn = "number"

@@ -11,11 +11,42 @@ return {
     },
     "saadparwaiz1/cmp_luasnip",
   },
-  config = function() 
+  config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
     require("luasnip.loaders.from_vscode").lazy_load()
+
+    local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
+    local kind_icons = {
+      Text = "󰉿",
+      Method = "󰆧",
+      Function = "󰊕",
+      Constructor = "",
+      Field = " ",
+      Variable = "󰀫",
+      Class = "󰠱",
+      Interface = "",
+      Module = "",
+      Property = "󰜢",
+      Unit = "󰑭",
+      Value = "󰎠",
+      Enum = "",
+      Keyword = "󰌋",
+      Snippet = "",
+      Color = "󰏘",
+      File = "󰈙",
+      Reference = "",
+      Folder = "󰉋",
+      EnumMember = "",
+      Constant = "󰏿",
+      Struct = "",
+      Event = "",
+      Operator = "󰆕",
+      TypeParameter = " ",
+      Misc = " ",
+    }
 
     cmp.setup({
       snippet ={
@@ -36,10 +67,22 @@ return {
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
+        { name = "nvim_lsp" }, -- lsp
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
       }),
+      window = {
+        completion = cmp.config.window.bordered({ border }),
+        documentation = cmp.config.window.bordered({ border }),
+      },
+      formatting = {
+        format = function(_, vim_item)
+          vim_item.kind = (kind_icons[vim_item.kind] or "foo") .. " " .. vim_item.kind
+          vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+          return vim_item
+        end
+      },
     })
   end
 }

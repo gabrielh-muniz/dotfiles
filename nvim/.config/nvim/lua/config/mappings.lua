@@ -13,6 +13,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 map("i", "jk", "<ESC>", {})
+map("v", "jk", "<ESC>", {})
 
 local keymap = vim.keymap
 keymap.set({ "n", "v" }, "j", function()
@@ -52,3 +53,6 @@ map({"n", "v"}, "<leader>y", [["+y]], {})
 map("n", "<leader>Y", [["+Y]], {})
 
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {})
+
+map("v", "<", "<gv", {})
+map("v", ">", ">gv", {})
