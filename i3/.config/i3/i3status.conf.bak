@@ -1,0 +1,45 @@
+## I3status CONFIG by GABRIEL
+
+## GENERAL SETTINGS
+general {
+	colors = false
+	interval = 5
+	separator = ""
+	color_good = "#98971a"
+	color_degraded = "#d78821"
+	color_bad = "#cc241d"
+	markup = pango
+}
+
+## MODULE ORDER
+
+order += "cpu_usage"
+order += "memory"
+order += "battery all"
+order += "volume master"
+order += "tztime local"
+
+cpu_usage {
+	format = "<span foreground='#98971a'></span><span background='#98971a' foreground='#282828'> CPU: %usage </span><span foreground='#98971a'></span>"
+}
+
+memory {
+	format = "<span foreground='#689d68'></span><span background='#689d68' foreground='#282828'> MEM: %used </span><span foreground='#689d68'></span>"
+}
+
+battery all {
+	format = "<span foreground='#b16286'></span><span background='#b16286' foreground='#282828'>%status %percentage</span><span foreground='#b16286'></span>"
+	status_bat = "󰂄"
+	status_full = "󰁹"
+	status_chr = "󰂏"
+}
+
+volume master {
+	format = "<span foreground='#458588'></span><span background='#458588' foreground='#282828'>  %volume </span><span foreground='#458588'></span>"
+	format_muted = "<span foreground='#458588'></span><span background='#458588' foreground='#282828'>󰝟 muted</span><span foreground='#458588'></span>"
+	device = "pulse:alsa_output.pci-0000_00_0e.0.analog-stereo"
+}
+
+tztime local {
+	format = "<span foreground='#d79921'></span><span background='#d79921' foreground='#282828'>%a, %d %b %R</span><span foreground='#d79921'></span>"
+}
