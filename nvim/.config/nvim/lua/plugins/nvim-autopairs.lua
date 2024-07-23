@@ -4,7 +4,7 @@ return {
   dependencies = {
     "hrsh7th/nvim-cmp",
   },
-  config = function() 
+  config = function()
     require("nvim-autopairs").setup({
       check_ts = true,
     })

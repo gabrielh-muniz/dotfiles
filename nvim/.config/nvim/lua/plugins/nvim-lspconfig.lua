@@ -64,12 +64,12 @@ return {
           },
         },
       }
-      local open_floating_preview = vim.lsp.util.open_floating_preview
-      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-        opts = opts or {}
-        opts.border = opts.border or "rounded" -- Set border to rounded
-        return open_floating_preview(contents, syntax, opts, ...)
-      end
+      -- disable signs
+      vim.lsp.handlers["textDocument/publishDiagnostics"] =
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          virtual_text = true,
+          signs = false
+        })
     end,
   },
 }
