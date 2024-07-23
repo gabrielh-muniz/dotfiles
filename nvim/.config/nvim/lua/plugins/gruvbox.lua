@@ -1,7 +1,7 @@
 return {
 	"ellisonleao/gruvbox.nvim",
 	priority = 1000,
-	config = function() 
+	config = function()
     local status_ok, gruvbox = pcall(require, "gruvbox")
     if not status_ok then
       print("Error on loading gruvbox module")

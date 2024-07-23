@@ -19,6 +19,10 @@ if not status_ok then
 end
 
 lazy_manager.setup("plugins", {
+  checker = {
+    enabled = true,
+    notify = false,
+  },
   change_detection = {
     notify = false,
   },
