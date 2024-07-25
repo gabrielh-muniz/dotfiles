@@ -10,6 +10,7 @@ return {
       dependencies = { "rafamadriz/friendly-snippets" },
     },
     "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-cmdline",
   },
   config = function()
     local cmp = require("cmp")
@@ -49,7 +50,7 @@ return {
     }
 
     cmp.setup({
-      snippet ={
+      snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
@@ -63,19 +64,28 @@ return {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+        ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" }, -- lsp
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
+        { name = "luasnip" },  -- snippets
+        { name = "buffer" },   -- text within current buffer
+        { name = "path" },     -- file system paths
       }),
       window = {
         completion = cmp.config.window.bordered({ border }),
         documentation = cmp.config.window.bordered({ border }),
       },
+      enabled = function()
+        local context = require("cmp.config.context")
+        if vim.api.nvim_get_mode().mode == "c" then
+          return true
+        else
+          return not context.in_treesitter_capture("comment")
+              and not context.in_syntax_group("Comment")
+        end
+      end,
       formatting = {
         format = function(_, vim_item)
           vim_item.kind = (kind_icons[vim_item.kind] or "foo") .. " " .. vim_item.kind
@@ -83,6 +93,20 @@ return {
           return vim_item
         end
       },
+    })
+    -- setup command mode config
+    cmp.setup.cmdline({ "/", "?" }, {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = "buffer" },
+      },
+    })
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources(
+        { { name = "path" } },
+        { { name = "cmdline" } }
+      ),
     })
   end
 }
