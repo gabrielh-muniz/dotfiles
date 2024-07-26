@@ -22,6 +22,14 @@ return {
     end,
   },
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = { "stylua" },
+      })
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
@@ -33,7 +41,7 @@ return {
       local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lsp_attach = function(client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
-        vim.keymap.set("n", "K", vim.lsp.buf.hover , opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, opts)
@@ -66,10 +74,10 @@ return {
       }
       -- disable signs
       vim.lsp.handlers["textDocument/publishDiagnostics"] =
-        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-          virtual_text = true,
-          signs = false
-        })
+          vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = true,
+            signs = false
+          })
     end,
   },
 }
