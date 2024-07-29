@@ -3,8 +3,9 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     require("conform").setup({
-      formatter_by_ft = {
+      formatters_by_ft = {
         lua = { "stylua" },
+        python = { "isort", "black" },
       },
       format_on_save = {
         lsp_fallback = true,
@@ -19,6 +20,6 @@ return {
         async = false,
         timeout_ms = 1000,
       })
-    end,{ desc = "Format file or range (in v mode)" })
+    end, { desc = "Format file or range (in v mode)" })
   end,
 }
