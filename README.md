@@ -13,7 +13,33 @@
 - Fetch: neofetch
 - Colorscheme: gruvbox
 
-## Installation
-Run `./setup.sh`
+## Dependencies
 
-**Note**: Currently, this script is made for brand new debian-based distros.
+GNU Stow:
+
+```bash
+# Debian-based
+sudo apt install stow
+```
+
+```bash
+# macOS
+brew install stow
+```
+
+## Installation
+
+Clone this repository:
+
+```bash
+git clone https://github.com/gabrielh-muniz/dotfiles.git ~/.dotfiles
+```
+
+## Usage
+
+Change directory to `~/.dotfiles` and stow the packages you want (remember to backup your previous config)
+
+```bash
+cd ~/.dotfiles
+stow *      # * = all packages / stow <package_name> for individual
+```
