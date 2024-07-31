@@ -2,6 +2,8 @@
     <a name="top" title="dotfiles">~/.&nbsp;📂</a> DOTFILES<br/> <sup><sub>made by <a href="https://github.com/gabrielh-muniz">me</a> </sub></sup>
 </h2>
 
+![Showcase](https://github.com/user-attachments/assets/5f5bf4d3-74c5-48b9-b5e5-a207de936f0c)
+
 - OS: Debian GNU/Linux 12 (bookworm)
 - WN: i3
 - Bar: i3status
