@@ -15,9 +15,9 @@ color_aqua = "#689d6a"
 color_gray = "#a89984"
 
 [character]
-success_symbol = '[](bold color_green)'
-error_symbol = '[](bold color_red)'
-vicmd_symbol = '[](bold color_green)'
+success_symbol = '[](bold color_yellow)'
+error_symbol = '[](bold color_red)'
+vicmd_symbol = '[](bold color_green)'
 
 [git_status]
 ahead = '[A](bold color_purple)'
