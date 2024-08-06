@@ -7,7 +7,7 @@
 - OS: Debian GNU/Linux 12 (bookworm)
 - WN: i3
 - Bar: i3status
-- Launcher: dmenu
+- Launcher: rofi
 - Terminal: st
 - Shell: Bash
 - Editor: Neovim
