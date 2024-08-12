@@ -7,13 +7,13 @@
 - OS: Debian GNU/Linux 12 (bookworm)
 - WN: i3
 - Bar: i3status
-- Launcher: rofi
-- Terminal: st
+- Launcher: Rofi
+- Terminal: Kitty
 - Shell: Bash
 - Editor: Neovim
-- Font: Meslo 
-- Fetch: neofetch
-- Colorscheme: gruvbox
+- Font: Fira Code 
+- Fetch: Neofetch
+- Colorscheme: Gruvbox
 
 ## Dependencies
 
