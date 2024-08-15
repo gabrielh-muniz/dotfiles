@@ -11,7 +11,7 @@
 - Terminal: Kitty
 - Shell: Bash
 - Editor: Neovim
-- Font: Fira Code 
+- Font: Meslo
 - Fetch: Neofetch
 - Colorscheme: Gruvbox
 
