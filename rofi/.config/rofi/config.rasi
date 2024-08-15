@@ -1,6 +1,6 @@
 configuration {
     show-icons: true;
-    font: "FiraCode Nerd Font 11";
+    font: "MesloLGS Nerd Font 11";
     modi: "window,run,drun,ssh,combi,filebrowser";
     display-ssh:    "󰣀 ssh:";
     display-run:    "󱓞 run:";
