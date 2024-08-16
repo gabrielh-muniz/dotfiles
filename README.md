@@ -9,6 +9,7 @@
 - Bar: i3status
 - Launcher: Rofi
 - Terminal: Kitty
+- Prompt: Starship
 - Shell: Bash
 - Editor: Neovim
 - Font: Meslo
