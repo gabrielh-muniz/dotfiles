@@ -14,9 +14,12 @@ color_purple = "#b16286"
 color_aqua = "#689d6a"
 color_gray = "#a89984"
 
+[username]
+show_always = true
+
 [character]
-success_symbol = '[](bold color_yellow)'
-error_symbol = '[](bold color_red)'
+success_symbol = '[󰘧](bold color_yellow)'
+error_symbol = '[󰘧](bold color_red)'
 vicmd_symbol = '[](bold color_green)'
 
 [git_status]
