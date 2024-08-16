@@ -38,6 +38,7 @@ opt.swapfile = false
 opt.backup = false
 
 opt.list = true
-opt.listchars = { space = "⋅", eol = "↲" }
+opt.listchars = { trail = "⋅", eol = "↲" }
+opt.showbreak = "↪"
 
 opt.signcolumn = "number"
