@@ -21,6 +21,9 @@ return {
 					"lua_ls",
 					"pyright",
 					"texlab",
+					"cssls",
+					"html",
+					"tsserver",
 				},
 			})
 		end,
