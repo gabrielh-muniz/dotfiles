@@ -1,3 +1,23 @@
+local ignore_patterns = {
+  "__pycache__",
+  "%.aux$",
+  "%.lof$",
+  "%.log$",
+  "%.fls$",
+  "%.out$",
+  "%.toc$",
+  "%.fmt$",
+  "%.fot$",
+  "%.cb$",
+  "%.cb2$",
+  "%.synctex.gz$",
+  "%.fdb_latexmk$",
+  "%.pdf$",
+  "%.pdf_tex$",
+  "%.eps_tex$",
+  "%.eps$",
+}
+
 return {
 	"stevearc/oil.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -11,9 +31,11 @@ return {
 			view_options = {
 				show_hidden = false,
 				is_hidden_file = function(name, _)
-					if name:match("__pycache__") then
-						return true
-					end
+          for _, pattern in ipairs(ignore_patterns) do
+            if name:match(pattern) then
+              return true
+            end
+          end
 					return false
 				end,
 			},
