@@ -2,6 +2,9 @@
 
 add_newline = true
 
+format = """$character$directory$git_branch$git_status$cmd_duration% \
+"""
+
 palette = 'gruvbox_dark'
 
 [palettes.gruvbox_dark]
@@ -14,13 +17,19 @@ color_purple = "#b16286"
 color_aqua = "#689d6a"
 color_gray = "#a89984"
 
-[username]
-show_always = true
-
 [character]
-success_symbol = '[󰘧](bold color_yellow)'
-error_symbol = '[󰘧](bold color_red)'
-vicmd_symbol = '[](bold color_green)'
+success_symbol = '[](bold color_yellow)'
+error_symbol = '[✗](bold color_red)'
+vicmd_symbol = '[](bold color_green)'
+
+[directory]
+format = '[$path ]($style)[$read_only]($read_only_style)'
+truncation_length = 1
+read_only = " "
+read_only_style = "color_red"
+
+[git_branch]
+format = '[$branch (:$remote_branch)]($style)'
 
 [git_status]
 ahead = '[A](bold color_purple)'
@@ -32,18 +41,6 @@ stashed = '[](bold color_aqua)'
 untracked = '[U](bold color_gray)'
 modified = '[M](bold color_blue)'
 conflicted = '[](bold color_yellow)'
-
-[python]
-symbol = "py "
-
-[c]
-symbol = "c "
-
-[lua]
-symbol = "lua "
-
-[nodejs]
-symbol = "js "
 
 [package]
 disabled = true
