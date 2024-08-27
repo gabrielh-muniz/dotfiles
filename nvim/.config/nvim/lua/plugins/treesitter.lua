@@ -32,6 +32,7 @@ return {
 				"python",
 				"sql",
 				"make",
+        "yaml",
 			},
 			incremental_selection = {
 				enable = true,
