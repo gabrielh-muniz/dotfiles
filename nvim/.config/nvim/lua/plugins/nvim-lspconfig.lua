@@ -23,7 +23,7 @@ return {
 					"texlab",
 					"cssls",
 					"html",
-					"tsserver",
+					"ts_ls",
 				},
 			})
 		end,
