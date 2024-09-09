@@ -2,7 +2,7 @@
 
 add_newline = true
 
-format = """$character$directory$git_branch$git_status$cmd_duration% \
+format = """$python$character$directory$git_branch$git_status$cmd_duration% \
 """
 
 palette = 'gruvbox_dark'
@@ -41,6 +41,10 @@ stashed = '[](bold color_aqua)'
 untracked = '[U](bold color_gray)'
 modified = '[M](bold color_blue)'
 conflicted = '[](bold color_yellow)'
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = "bright-black"
 
 [package]
 disabled = true
