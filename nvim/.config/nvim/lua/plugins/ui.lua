@@ -53,6 +53,7 @@ return {
 						{
 							lazy_status.updates,
 							cond = lazy_status.has_updates,
+							color = { fg = "#D79921" },
 						},
 						{ lsp_clients, icon = "" },
 						{ "encoding" },
