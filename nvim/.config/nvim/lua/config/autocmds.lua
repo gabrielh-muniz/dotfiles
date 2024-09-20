@@ -12,11 +12,12 @@ autocmd("TextYankPost", {
 })
 
 -- Hot reload
-local dart_group = augroup("DartTools", { clear = true })
-autocmd({ "BufWritePost" }, {
-	group = dart_group,
-	pattern = { "*.dart" },
-	callback = function()
-		os.execute("pgrep -f -o '[f]lutter_tool.*run' | xargs kill -s USR1")
-	end,
-})
+-- This is not working properly. Need to fix
+-- local dart_group = augroup("DartTools", { clear = true })
+-- autocmd({ "BufWritePost" }, {
+-- 	group = dart_group,
+-- 	pattern = { "*.dart" },
+-- 	callback = function()
+-- 		os.execute("pgrep -f -o '[f]lutter_tool.*run' | xargs kill -s USR1")
+-- 	end,
+-- })
