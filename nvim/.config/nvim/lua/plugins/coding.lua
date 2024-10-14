@@ -23,6 +23,9 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
+				experimental = {
+					ghost_text = true,
+				},
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
@@ -39,8 +42,23 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
 					["<C-e>"] = cmp.mapping.abort(), -- close completion window
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
+					-- This is from https://github.com/hrsh7th/nvim-cmp/discussions/1498
+					["<Tab>"] = cmp.mapping(function(fallback)
+						-- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+						if cmp.visible() then
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+							else
+								cmp.confirm()
+							end
+						else
+							fallback()
+						end
+					end, { "i", "s", "c" }),
 				}),
 				sources = cmp.config.sources({
+					{ name = "copilot" }, -- copilot
 					{ name = "nvim_lsp" }, -- lsp
 					{ name = "luasnip" }, -- snippets
 					{ name = "buffer" }, -- text within current buffer
@@ -58,6 +76,7 @@ return {
 					format = lspkind.cmp_format({
 						maxwidth = 50,
 						ellipsis_char = "...",
+						symbol_map = { Copilot = "" },
 					}),
 				},
 			})
@@ -174,6 +193,23 @@ return {
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		config = function()
 			require("nvim-surround").setup({})
+		end,
+	},
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				seggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
 		end,
 	},
 }

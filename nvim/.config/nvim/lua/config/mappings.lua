@@ -49,3 +49,6 @@ map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {}
 
 map("v", "<", "<gv", {})
 map("v", ">", ">gv", {})
+
+map("n", "<leader>cpd", ":Copilot disable<CR>", {})
+map("n", "<leader>cpe", ":Copilot enable<CR>", {})
