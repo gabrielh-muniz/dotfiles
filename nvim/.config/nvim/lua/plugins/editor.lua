@@ -177,6 +177,7 @@ return {
 					"lua",
 					"vim",
 					"gitignore",
+					"go",
 					"vimdoc",
 					"c",
 					"cpp",
@@ -224,6 +225,7 @@ return {
 				formatters_by_ft = {
 					lua = { "stylua" },
 					python = { "isort", "black" },
+					go = { "gofmt" },
 				},
 				format_on_save = {
 					lsp_fallback = true,

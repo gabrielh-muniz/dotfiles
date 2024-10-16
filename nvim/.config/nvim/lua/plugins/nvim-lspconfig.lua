@@ -24,6 +24,7 @@ return {
 					"cssls",
 					"html",
 					"ts_ls",
+					"gopls",
 				},
 			})
 		end,
@@ -83,10 +84,29 @@ return {
 					},
 				},
 			})
+			local util = require("lspconfig.util")
+			-- Go
+			lspconfig.gopls.setup({
+				on_attach = lsp_attach,
+				capabilities = lsp_capabilities,
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+				root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+				settings = {
+					gopls = {
+						completeUnimported = true, -- automatically import packages on use
+						usePlaceholders = true, -- add placeholder to function parameters
+						analyses = {
+							unusedparams = true, -- warning for any parameters unused
+						},
+						staticcheck = true,
+					},
+				},
+			})
+
+			-- dart
 			local dartExcludedFolders = {
 				vim.fn.expand("$HOME/.pub-cache"),
 			}
-
 			lspconfig.dartls.setup({
 				on_attach = lsp_attach,
 				capabilities = lsp_capabilities,
