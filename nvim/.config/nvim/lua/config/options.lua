@@ -25,8 +25,8 @@ opt.termguicolors = true
 opt.swapfile = false
 opt.backup = false
 
-opt.list = true
-opt.listchars = { trail = "⋅", eol = "↲" }
+-- opt.list = true
+-- opt.listchars = { trail = "⋅", eol = "↲" }
 opt.showbreak = "↪"
 
 opt.signcolumn = "number"
