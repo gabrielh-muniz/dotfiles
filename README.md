@@ -2,6 +2,8 @@
     DOTFILES
 </h2>
 
+![Showcase](https://github.com/user-attachments/assets/bd19d611-5468-4452-bcca-8518fac5f959)
+
 - OS: Arch
 - WN: Hyprland 
 - Bar: Waybar 
