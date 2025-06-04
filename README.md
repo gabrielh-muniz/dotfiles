@@ -4,18 +4,18 @@
 
 ![Showcase](https://github.com/user-attachments/assets/bd19d611-5468-4452-bcca-8518fac5f959)
 
-- OS: Arch
-- WN: Hyprland 
-- Bar: Waybar 
-- Launcher: Rofi
-- Terminal: Ghostty
-- Prompt: Created by me 
-- Shell: Zsh
-- Editor: Neovim
-- Font: JetBrains Mono
-- Colorscheme: Gruvbox
-- Notifications: Dunst
-- Multiplexer: Tmux w/ scripts
+- OS: ![Arch](https://archlinux.org/)
+- WN: ![Hyprland](https://hyprland.org/)
+- Bar: ![Waybar](https://github.com/Alexays/Waybar)
+- Launcher: ![Rofi](https://github.com/lbonn/rofi)
+- Terminal: ![Ghostty](https://ghostty.org/)
+- Prompt: ![Starship](https://starship.rs/)
+- Shell: ![Zsh](https://www.zsh.org/)
+- Editor: ![Neovim](https://neovim.io/)
+- Font: ![JetBrains Mono](https://www.jetbrains.com/lp/mono/)
+- Colorscheme: ![Gruvbox](https://github.com/morhetz/gruvbox)
+- Notifications: ![Dunst](https://github.com/dunst-project/dunst)
+- Multiplexer: ![Tmux w/ scripts](https://github.com/tmux/tmux)
 
 ## Dependencies
 
