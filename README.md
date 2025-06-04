@@ -5,7 +5,7 @@
 ![Showcase](https://github.com/user-attachments/assets/bd19d611-5468-4452-bcca-8518fac5f959)
 
 - OS: ![Arch](https://archlinux.org/)
-- WN: ![Hyprland](https://hyprland.org/)
+- WM: ![Hyprland](https://hyprland.org/)
 - Bar: ![Waybar](https://github.com/Alexays/Waybar)
 - Launcher: ![Rofi](https://github.com/lbonn/rofi)
 - Terminal: ![Ghostty](https://ghostty.org/)
