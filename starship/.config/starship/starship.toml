@@ -1,0 +1,55 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """$nodejs$python$character$directory$git_branch$git_status$cmd_duration% \
+"""
+
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+color_bg = '#282828'
+color_red = '#cc241d'
+color_green = "#98971a"
+color_yellow = "#d79921"
+color_blue = "#458588"
+color_purple = "#b16286"
+color_aqua = "#689d6a"
+color_gray = "#a89984"
+
+[character]
+success_symbol = '[➜](bold color_yellow)'
+error_symbol = '[✘](bold color_red)'
+vicmd_symbol = '[](bold color_green)'
+
+[directory]
+format = '[$path ]($style)[$read_only]($read_only_style)'
+truncation_length = 1
+read_only = ""
+read_only_style = "color_red"
+
+[git_branch]
+format = '[git:\($branch\) (:$remote_branch)]($style)'
+symbol = ''
+
+[git_status]
+ahead = '[A](bold color_purple)'
+behind = '[B](bold color_purple)'
+staged = '[S](bold color_green)'
+deleted = '[D](bold color_red)'
+renamed = '[R](bold color_purple)'
+stashed = '[](bold color_aqua)'
+untracked = '[U](bold color_gray)'
+modified = '[M](bold color_blue)'
+conflicted = '[](bold color_yellow)'
+
+[python]
+format = '[(\($virtualenv\) )]($style)'
+style = "bright-black"
+
+[nodejs]
+format = '[(\($version\) )]($style)'
+style = "bright-black"
+
+[package]
+disabled = true
