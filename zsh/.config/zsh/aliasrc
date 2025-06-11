@@ -1,0 +1,11 @@
+alias ls='ls -lah --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+
+alias dof='cd ~/dotfiles'
+alias nconfig='cd ~/dotfiles/nvim/.config/nvim'
+
+alias tn='tmux new -s "$(pwd | sed '\''s/.*\///g'\'')"'
+alias t='ttt'
+
+alias vim='nvim'
