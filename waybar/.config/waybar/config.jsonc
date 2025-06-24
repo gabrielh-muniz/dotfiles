@@ -1,0 +1,115 @@
+{
+    "layer": "top",
+    "position": "top",
+    "spacing": 0,
+    "margin-top": 8,
+    "margin-left": 15,
+    "margin-right": 15,
+    "margin-bottom": 0,
+    "modules-left": [
+        "hyprland/window",
+        //"custom/arch",
+        "hyprland/workspaces",
+        "mpris"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "hyprland/submap",
+        "custom/package",
+        "pulseaudio",
+        "custom/nvidia",
+        "cpu",
+        "memory",
+        "temperature",
+        "hyprland/language"
+    ],
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "rewrite": {
+            ".*[Ff]irefox.*": "Firefox",
+            ".*nvim.*": "Neovim",
+            ".*yazi.*": "Yazi",
+            ".*tmux.*": "Tmux",
+            ".*zen.*": "Zen",
+            "^$": "Hypr"
+        }
+    },
+    "custom/arch": {
+        "format": "󰣇",
+        "tooltip": true,
+        "tooltip-format": "btw"
+    },
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "format-icons": {
+            "urgent": " ",
+            "active": " ",
+            "default": " "
+        }
+    },
+    "mpris": {
+        "format": "{player_icon} {title}",
+        "format-paused": "{status_icon} <i>{title}</i>",
+	"max-length": 40,
+        "player-icons": {
+            "default": " ",
+            "active": "󰝚 ",
+            "firefox": "󰈹 " 
+        },
+        "status-icons": {
+            "paused": " "
+        }
+    },
+    "hyprland/submap": {
+        "format": "{}",
+        "tooltip": true
+    },
+    "clock": {
+        "format": "{:%H:%M - %e %B}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "custom/package": {
+        "exec": "$HOME/.local/bin/packagecounter",
+        "return-type": "json",
+        "format": "{text}",
+        "interval": 100
+    },
+    "pulseaudio": {
+        "format": "{icon}{volume}%",
+        "format-muted": "󰸈 {volume}%",
+	"scroll-step": 1,
+        "format-icons": {
+            "default": ["", "", " "]
+        },
+	"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "custom/nvidia": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu,temperature.gpu --format=csv,noheader,nounits | awk -F ', ' '{printf \"%d%%|%d°C\\n\", $1, $2}'",
+        "format": "GPU:{}",
+	"interval": 100
+    },
+    "cpu": {
+        "format": "CPU:{usage}%|{max_frequency}GHz",
+        "tooltip": true,
+	"on-click": "kitty -e htop --sort-key PERCENT_CPU"
+    },
+    "memory": {
+        "format": " {}%/{total}",
+	"tooltip": true
+    },
+    "temperature": {
+        "interval": 10,
+        "hwmon-path": "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 74,
+        "format-critical": " {temperatureC}",
+        "format": " {temperatureC}°C"
+    },
+    "hyprland/language": {
+       "format": " {}",
+       "format-en": "EN"
+    }
+}

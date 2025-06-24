@@ -1,0 +1,97 @@
+/* gruvbox */
+@define-color bg 	#282828;
+@define-color fg 	#ebdbb2;
+@define-color active 	#a89984;
+@define-color accent 	#88C0D0;
+@define-color gblue 	#458588;
+@define-color ggreen 	#98971a;
+@define-color gaqua 	#689d6a;
+@define-color gpurple 	#b16286;
+@define-color ggray 	#928378;
+@define-color gred 	#cc241d;
+@define-color gyellow #d79921;
+
+/* tokionight */
+@define-color tbg #222436;
+@define-color tfg #c8d3f5;
+@define-color tactive #2f334d;
+@define-color taccent #394B70;
+@define-color tyellow #ffc777;
+@define-color tgreen #c3e88d;
+@define-color tred #ff757f;
+
+/* nightfox (carbonfox) */
+@define-color cbg #161616;
+@define-color cfg #f2f4f8;
+@define-color cactive #2a2a2a;
+@define-color caccent #525253;
+@define-color cyellow #08BDBA;
+@define-color cgreen #25be6a;
+@define-color cred #EE5396;
+
+* {
+    border: none;
+    min-height: 0;
+    font-family: "JetBrainsMono NF";
+    font-weight: bold;
+}
+
+#waybar {
+    border-radius: 10px;
+    background: @bg;
+    color: @fg;
+    font-size: 14px;
+}
+
+#workspaces button {
+    color: @ggray;
+    background: transparent;
+    transition: color 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    color: @gyellow;
+}
+
+#clock,
+#custom-package,
+#pulseaudio,
+#custom-nvidia,
+#cpu,
+#memory,
+#temperature,
+#submap,
+#window,
+#language {
+    padding: 0.4em 0.6em;
+    margin: 0.3em 0.3em;
+    border-radius: 3px;
+    color: @fg;
+}
+
+#mpris {
+	margin-left: 0.5em;
+    color: @gyellow;
+}
+
+#temperature {
+	background: @ggreen;
+    color: @bg;
+}
+
+#memory.critical,
+#cpu.critical,
+#temperature.critical {
+	background: @gred;
+	color: @fg;
+}
+
+#submap {
+    background: @gyellow;
+    color: @bg;
+}
+
+#window {
+    color: @gpurple;
+}
+
