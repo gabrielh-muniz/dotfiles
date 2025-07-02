@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# if not in tmux
+if [ -z "$TMUX" ]; then
+    echo "You are not in tmux"
+
+    ZOXIDE_RESULT=$(zoxide query -l | fzf --reverse)
+
+    # if empty exit
+    if [ -z "$ZOXIDE_RESULT" ]; then
+        exit 0
+    fi
+
+    FOLDER=$(basename $ZOXIDE_RESULT)
+
+    SESSION=$(tmux list-sessions | grep $FOLDER | awk '{print $1}' | sed 's/:$//')
+    SESSION=${SESSION//:/}
+    echo $SESSION
+
+    if [ -z "$SESSION" ]; then
+        echo "Session does not exist"
+        cd $ZOXIDE_RESULT
+        tmux new-session -s $FOLDER
+    else
+        echo "Session exists"
+        tmux attach-session -t $SESSION
+    fi
+else
+    echo "you are in tmux"
+    ZOXIDE_RESULT=$(zoxide query -l | fzf --reverse)
+
+    if [ -z "$ZOXIDE_RESULT" ]; then
+        exit 0
+    fi
+
+    FOLDER=$(basename $ZOXIDE_RESULT)
+
+    SESSION=$(tmux list-sessions | grep $FOLDER | awk '{print $1}' | sed 's/:$//')
+    SESSION=$(SESSION//:/)
+
+    if [-z "$SESSION" ]; then
+        echo "Session does not exist"
+        cd $ZOXIDE_RESULT
+        tmux new-session -d -s $FOLDER
+        tmux switch-client -t $FOLDER
+    else
+        echo "Session exists"
+        tmux switch-client -t $SESSION
+fi

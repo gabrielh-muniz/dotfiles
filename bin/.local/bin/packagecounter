@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Count installed packages
+PKG_INSTALLED=$(pacman -Qq | wc -l)
+
+# Check available updates
+PKG_UPDATES=$(checkupdates | wc -l)
+
+# If no updates, display 0
+if [[ -z "$PKG_UPDATES" ]]; then
+    PKG_UPDATES=0
+fi
+
+# Output JSON for Waybar
+echo "{\"text\": \"PKG:$PKG_INSTALLED|$PKG_UPDATES\", \"tooltip\": \"Installed: $PKG_INSTALLED\nUpdates: $PKG_UPDATES\"}"
+

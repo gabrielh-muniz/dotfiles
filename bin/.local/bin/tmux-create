@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+# ---------------------------------------------------------------------------
+#  ttt  —  fzf + zoxide + filesystem → tmux sessioniser
+# ---------------------------------------------------------------------------
+
+set -euo pipefail
+
+##############################################################################
+# CONFIG – edit these                                                      ###
+##############################################################################
+SEARCH_ROOTS=("$HOME/work")  # add/remove at will
+MAX_DEPTH=2                                            # how deep fd/find goes
+
+##############################################################################
+# picker() – fzf or fzf-tmux with preview                                   ###
+##############################################################################
+picker() {
+    local PREVIEW=( --preview='ls -A {} | head -n 20'
+                    --preview-window=right:60%:wrap
+                    --reverse )
+    if [[ -n ${TMUX:-} ]]; then
+        fzf-tmux -p 80%,60% "${PREVIEW[@]}" "$@"
+    else
+        fzf "${PREVIEW[@]}" "$@"
+    fi
+}
+
+##############################################################################
+# 1.  Collect candidate directories                                         ###
+##############################################################################
+declare -a fs_dirs zo_dirs dirs
+
+# --- from SEARCH_ROOTS -------------------------------------------------------
+if command -v fd &>/dev/null; then
+    mapfile -t fs_dirs < <(fd . "${SEARCH_ROOTS[@]}" -td -d "$MAX_DEPTH")
+else
+    mapfile -t fs_dirs < <(find "${SEARCH_ROOTS[@]}" -maxdepth "$MAX_DEPTH" -type d)
+fi
+
+# --- from zoxide -------------------------------------------------------------
+if command -v zoxide &>/dev/null; then
+    mapfile -t zo_dirs < <(zoxide query -l)
+fi
+
+# --- union + de-dupe + sort --------------------------------------------------
+mapfile -t dirs < <(printf '%s\n' "${fs_dirs[@]}" "${zo_dirs[@]}" \
+                    | awk '!seen[$0]++' | sort)
+
+[[ ${#dirs[@]} -eq 0 ]] && { echo "No directories found"; exit 1; }
+
+##############################################################################
+# 2.  Let the user pick (Esc = quit)                                        ###
+##############################################################################
+dir=$(printf '%s\n' "${dirs[@]}" | picker) || exit 0
+[ -z "$dir" ] && exit 0
+
+# If the directory doesn’t exist yet, create it (new project workflow)
+[ -d "$dir" ] || mkdir -p "$dir"
+
+##############################################################################
+# 3.  Safe session name                                                     ###
+##############################################################################
+dir=${dir%/}                             # trim trailing slash
+session=$(basename "$dir")               # last path component
+session=${session//[: ]/_}               # no spaces / colons
+[ -z "$session" ] && session="sess_$(date +%s)"
+
+##############################################################################
+# 4.  Create / attach / switch                                              ###
+##############################################################################
+if tmux has-session -t "$session" 2>/dev/null; then
+    # — session exists —
+    if [[ -n ${TMUX:-} ]]; then
+        tmux switch-client -t "$session"
+    else
+        exec tmux attach -t "$session"
+    fi
+else
+    # — create new —
+    if [[ -n ${TMUX:-} ]]; then
+        tmux new-session -d -s "$session" -c "$dir"
+        tmux switch-client   -t "$session"
+    else
+        exec tmux new-session -s "$session" -c "$dir"
+    fi
+fi

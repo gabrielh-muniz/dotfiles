@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TMS_LAUNCHER="$HOME/.local/bin/ttt"   # your “create session” helper
+DASH_HEIGHT="60%"                    # popup height
+DASH_WIDTH="70%"                     # popup width
+
+# Gather all seseions
+mapfile -t sessions < <(tmux list-sessions -F '#{session_name}')
+[[ ${#sessions[@]} -eq 0 ]] && {
+  echo "No sessions – press Alt-n to create one" 1>&2
+  sleep 1; exit 0
+}
+
+# fzf dashboard
+choice=$(printf '%s\n' "${sessions[@]}" \
+  | fzf --prompt='tmux ' \
+        --height=100% \
+        --border \
+        --expect='alt-n,alt-x,alt-r' \
+        --preview='tmux list-windows -t {}' \
+        --preview-window=right:60%:wrap)
+
+key=$(head -n1 <<<"$choice")            # key pressed
+target=$(tail -n1 <<<"$choice")         # highlighted session (may be empty)
+
+# Actions
+case "$key" in
+  alt-n)                     # -------------------- new session
+      "$TMS_LAUNCHER"
+      ;;
+  alt-x)                     # -------------------- kill session
+      [[ -z $target ]] && exit 0
+      tmux confirm-before -p "kill session $target? (y/n)" "kill-session -t $target"
+      ;;
+  alt-r)                     # -------------------- rename session
+      [[ -z $target ]] && exit 0
+      read -rp "New name for $target: " newname
+      [[ -z $newname ]] && exit 0
+      tmux rename-session -t "$target" "$newname"
+      ;;
+  *)                         # -------------------- Enter (switch)
+      [[ -z $target ]] && exit 0
+      tmux switch-client -t "$target"
+      ;;
+esac

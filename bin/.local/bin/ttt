@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Tiny zoxide + fzf + tmux “sessioniser”
+#   • pick a dir from zoxide
+#   • create or attach/switch to a tmux session whose name = dir basename
+# Works inside tmux (popup) or outside.
+
+set -euo pipefail
+
+##############################################################################
+# 1. Pick a directory with zoxide + fzf (or fzf-tmux in tmux)
+##############################################################################
+if [ -n "${TMUX:-}" ]; then
+  picker() { fzf-tmux -p 80%,50% --reverse "$@"; }   # inside tmux: popup-style
+else
+  picker() { 
+      fzf --preview='ls -A {} | head -n 20' \
+          --preview-window=right:60%:wrap \
+          "$@"; 
+  }
+fi
+
+dir=$(zoxide query -l | picker)          # Esc ==> empty string
+[ -z "$dir" ] && exit 0
+
+##############################################################################
+# 2. Derive a *safe* session name
+##############################################################################
+dir=${dir%/}                             # trim trailing slash
+session=$(basename "$dir")               # last path component
+session=${session//[: ]/_}               # spaces & colons → underscore
+[ -z "$session" ] && session="sess_$(date +%s)"
+
+##############################################################################
+# 3. Create / attach / switch
+##############################################################################
+if tmux has-session -t "$session" 2>/dev/null; then
+  # ── session already exists ────────────────────────────────────────────────
+  if [ -n "${TMUX:-}" ]; then
+    tmux switch-client -t "$session"
+  else
+    exec tmux attach -t "$session"
+  fi
+else
+  # ── create new session ────────────────────────────────────────────────────
+  if [ -n "${TMUX:-}" ]; then
+    tmux new-session   -d  -s "$session" -c "$dir"
+    tmux switch-client     -t "$session"
+  else
+    exec tmux new-session     -s "$session" -c "$dir"
+  fi
+fi
+

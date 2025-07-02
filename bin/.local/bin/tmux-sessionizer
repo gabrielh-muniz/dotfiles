@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+SEARCH_ROOTS=("$HOME" "$HOME/work")
+
+if command -v fd &>/dev/null; then
+    mapfile -t dirs < <(fd . "${SEARCH_ROOTS[@]}" -td -d2)
+else
+    mapfile -t dirs < <(find "${SEARCH_ROOTS[@]}" -type d -maxdepth 2)
+fi
+[[ ${#dirs[@]} -eq 0 ]] && { echo "No directories found"; exit 1; }
+
+choice=$(printf '%s\n' "${dirs[@]}" \
+    | fzf --prompt='new-session ')
+[[ -z $choice ]] && exit 0
+
+# ---------- derive a safe session name using sed ----------
+# 1. strip any trailing slash        (s#/$##)
+# removes one trailing slash if it exists (/path/foo/ -> /path/foo)
+# 2. keep only the text after last / (s#.*/##)
+# deletes everything up to and inlcuding the last / (leaving just foo)
+session=$(printf '%s\n' "$choice" | sed -E 's#/$##; s#.*/##')
+
+# replace forbidden chars
+session=${session//[: ]/_}
+[[ -z $session ]] && session="sess_$(date +%s)"
+
+# ---------- launch or attach ----------
+if tmux has-session -t "$session" 2>/dev/null; then
+  exec tmux attach -t "$session"
+else
+  exec tmux new-session -s "$session" -c "$choice"
+fi
+

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+SHARE=~/.local/share/nvim
+STATE=~/.local/state/nvim
+CACHE=~/.cache/nvim
+
+success() {
+    local msg="$1" 
+    echo -e "[\e[32mOK\e[0m] $msg"
+}
+
+if [[ -d "$SHARE" ]]; then
+    rm -rf "$SHARE"
+fi
+
+if [[ -d "$STATE" ]]; then
+    rm -rf "$STATE"
+fi
+
+if [[ -d "$CACHE" ]]; then
+    rm -rf "$CACHE"
+fi
+
+success "Neovim cleaned successfully."

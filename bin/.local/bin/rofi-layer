@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rofi -show drun &
+
+sleep 0.1
+
+hyprctl layers
