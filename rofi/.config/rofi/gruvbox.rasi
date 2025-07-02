@@ -1,0 +1,52 @@
+* {
+	gbg: #1d2021;
+	gbg-1: #282828;
+	gfg: #ebdbb2;
+	ggray: #928374;
+	ggreen: #98971a;
+}
+
+window {
+		background-color: @gbg;
+		children: [mainbox];
+}
+
+mainbox {
+		background-color: inherit;
+		padding: 1em;
+		children: [entry,listview];
+}
+
+
+entry {
+	expand: false;
+	color: @gfg;
+	background-color: inherit;
+	padding: 25px 0;
+}
+
+listview {
+		background-color: inherit;
+	spacing: 0.5em;
+	dynamic: false;
+	cycle:   true;
+}
+
+element {
+		padding: 12px;
+		background-color: inherit;
+}
+
+element-icon { 
+		size: 28px; 
+		background-color: inherit;
+}
+
+element-text {
+		background-color: inherit;
+		text-color: @gfg;
+}
+
+element selected {
+		background-color: @gbg-1;
+}
